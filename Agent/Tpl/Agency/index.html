@@ -1,0 +1,107 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>复爵教育后台管理</title>
+	<link rel="stylesheet" type="text/css" href="/Public/Backend/css/layout.css" />
+	<link rel="stylesheet" type="text/css" href="/Public/Backend/css/list.css" />
+	<script type="text/javascript">    
+	    function DoDel(Pkid){
+	    	var msg='项目及机构所有信息将被删除,确定要删除此机构吗?';
+	    	if(confirm(msg)){
+                window.location.href="/Backend/Agency/remove/pkid/"+Pkid+"/pno/{$pno}";
+	    	}
+	    }
+	    function DoEdit(Pkid){
+            window.location.href="/Backend/Agency/edit/pkid/"+Pkid+"/pno/{$pno}";
+	    }
+	    function Galley(Pkid){
+	    	window.location.href="/Backend/Agency/edit/pkid/"+Pkid+"/tab/1/pno/{$pno}";
+	    }
+	    function Course(Pkid){
+	    	window.location.href="/Backend/Agency/edit/pkid/"+Pkid+"/tab/2/pno/{$pno}";
+	    }
+	</script>
+</head>
+
+<body>
+	<div class="header">
+		机构列表
+	</div>
+	<form action="/Backend/Agency/index" method="post" class="formskin">
+		<input name="mode" type="hidden" value="search">
+		<div>
+			<label>
+				编号
+				<input type="text" name="code" maxlength="50" value="{$map.code}"/>
+			</label>
+			<label>
+				名称
+				<input type="text" name="title" maxlength="50" value="{$map.title}"/>
+			</label>
+			<label>
+				品牌
+				<input type="text" name="brand" maxlength="50" value="{$map.brand}"/>
+			</label>
+			<input type="submit" value="搜索" />
+		</div>
+	</form>
+	<div class="container">
+		<table border="1" cellpadding="5" cellspacing="0" width="100%" class="tableskin">
+			<tr>
+				<th width="50">编号</th>
+				<th>机构名称</th>
+                <!--<th width="120">科目类型</th>-->
+                <th width="90">培训品牌</th>
+                <th width="55">城区</th>
+                <th width="150">地址</th>
+                <th width="100">电话</th>
+                <th width="110">营业时间</th>
+                <!--<th width="100">图片</th>-->
+                <th width="50">签约</th>
+				<th width="50">显示</th>
+				<th width="120">关联</th>
+				<th width="50">操作</th>
+			</tr>
+            <volist name="agency_list" id="vo">
+			<tr>
+				<td>{$vo.code}</td>
+				<td>
+					<a href="javascript:DoEdit('{$vo.pkid}');">{$vo.title}</a>
+				</td>
+				<!--<td><volist id="d" name="vo.category_list">{$d.title}&nbsp;</volist></td>-->
+                <td>{$vo.brand_name}</td>
+                <td>{$vo.area_name}</td>
+                <td>{$vo.address}</td>
+                <td>{$vo.telephone}</td>
+                <td>{$vo.operating_hours}</td>
+                <!--<td>
+                    <img src="{$vo.picture}" width="80">
+                </td>-->
+                <if condition="$vo.sign_type eq '1'">
+                    <td align="center"><img src="/Public/Backend/images/public/yes.gif" /></td>
+                    <else/>
+                    <td align="center"><img src="/Public/Backend/images/public/no.gif" /></td>
+                </if>
+                <if condition="$vo.status eq 'Y'">
+                    <td align="center"><a href="/Backend/Agency/hide/pkid/{$vo.pkid}/pno/{$pno}"><img src="/Public/Backend/images/public/yes.gif" /></a></td>
+                    <else/>
+                    <td align="center"><a href="/Backend/Agency/show/pkid/{$vo.pkid}/pno/{$pno}"><img src="/Public/Backend/images/public/no.gif" /></a></td>
+                </if>
+				<td align="center">
+					<a href="javascript:Galley('{$vo.pkid}');">相册图片</a>
+					<a href="javascript:Course('{$vo.pkid}');">培训科目</a>
+				</td>
+				<td align="center">
+					<!--<a href="/Agency/show/id-{$vo.pkid}" target="_blank">阅览</a>-->
+                    <a href="javascript:DoDel('{$vo.pkid}');">删除</a>
+				</td>
+			</tr>
+			</volist>
+		</table>
+		<div class="pagenation">
+			{$page}
+		</div>
+	</div>
+</body>
+</html>

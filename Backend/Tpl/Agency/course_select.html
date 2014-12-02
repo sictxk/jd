@@ -1,0 +1,6 @@
+<select name="course_id_{$category_id}[]" class="course" style="width:120px;">
+<option value="">选择科目</option>
+<volist name="course_list" id="vo">
+<option value="{$vo.pkid}">{$vo.title}</option>
+</volist>
+</select>

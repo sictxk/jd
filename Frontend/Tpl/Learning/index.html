@@ -1,0 +1,150 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>学习中心-交大100-在线学堂</title>
+<link href="/Public/Frontend/jQueryAssets/jquery.ui.core.min.css" rel="stylesheet" type="text/css">
+<link href="/Public/Frontend/jQueryAssets/jquery.ui.theme.min.css" rel="stylesheet" type="text/css">
+<link href="/Public/Frontend/jQueryAssets/jquery.ui.tabs.min.css" rel="stylesheet" type="text/css">
+<link href="/Public/Frontend/css/generic.css" type="text/css" rel="stylesheet">
+<link href="/Public/Frontend/jQueryAssets/jquery.ui.accordion.min.css" rel="stylesheet" type="text/css">
+<script src="/Public/Frontend/jQueryAssets/jquery-1.8.3.min.js" type="text/javascript"></script>
+<script src="/Public/Frontend/jQueryAssets/jquery-ui-1.9.2.tabs.custom.min.js" type="text/javascript"></script>
+<script src="/Public/Frontend/jQueryAssets/jquery-ui-1.9.2.accordion.custom.min.js" type="text/javascript"></script>
+<script type="text/javascript" src="/Public/Frontend/script/public.js"></script>
+<script type="text/javascript">
+$(function() {
+	$( ".coursewrap,.mycoursewrap" ).tabs(); 
+	$( ".noticelist" ).accordion(); 
+	$("input.editnotice").click(function(){
+		$(this).toggleClass("active");
+		$(".noticelist h3 b").toggleClass("active");
+	});
+});
+</script>
+</head>
+
+<body>
+<div class="wrapper">
+    <div class="topwrap">
+        <div class="logo"><div class="slogan"></div></div>
+        <div class="topo">
+            <div class="tel"><span>咨询热线：</span>021-34690659</div>
+            <nav>
+            <div class="nav">
+                <a href="/">首页</a>
+                <a href="" class="active">学习中心<b></b></a>
+                <a href="/Frontend/Preview">试看课程</a>
+                <a href="/Frontend/Teacher">师资团队</a>
+                <a href="/Frontend/Notice">公告通知</a>
+                <a href="">走进复爵</a>
+            </div>
+            </nav>
+        </div>
+    </div>
+    <!--登陆 开始-->
+    <if condition="$user_info eq ''">
+    <div class="learningcentrewrap" style="display:block;">
+    <else/>
+    <div class="learningcentrewrap" style="display:none;">
+    </if>
+    	<div class="kidinfowrap">
+            <h1>亲爱的学生/家长</h1>
+            <h2>欢迎你回到交大100在线</h2>
+        </div>
+        <div class="coursewrap">
+        	<ul class="coursertype"></ul>
+            <div class="mycoursewrap">
+            	<div class="curserlistwrap">
+                    <div class="learningcentreloginwrap">
+                        <div class="loginbox">
+                            <h1>开始学习-登录</h1>
+                            <form id="LoginForm" name="LoginForm" method="post" action="/Frontend/User/login_verify">
+                                <label class="username"><input class="logininput" id="username" name="username" placeholder="账号/手机号/邮箱"></label>
+                                <label class="password"><input class="loginpassword" id="password" name="password" type="password"  placeholder="******"></label>
+                                <label class="forgetpw"><a>忘记密码？</a></label>
+                                <label class="submitlog"><input type="button" value="登 陆" id="LoginBtn"></label>
+                            </form>
+                          <a href="" class="registersub">还没有账号，马上注册!</a>
+                        </div>
+                    </div>
+                </div>
+        	</div>
+        </div>
+    </div>
+    <!--登陆 结束-->
+    
+    <!--登陆后页面 开始-->
+    <if condition="$user_info eq ''">
+    <div class="learningcentrewrap" style="display:none;">
+     <else/>
+     <div class="learningcentrewrap" style="display:block;">
+     </if>
+    	<div class="kidinfowrap">
+            <h1>{$user_info.truename} 同学</h1>
+            <h2>欢迎你回到交大100在线</h2>
+            <div class="levelinfo">年级：{$user_info.grade_title}</div>
+            <div class="parentinfo">家长：{$user_info.parents}</div>
+        </div>
+        <div class="coursewrap">
+        	<ul class="coursertype">
+            	<li><a href="#mycoursewrap">我的课程</a></li>
+            	<li><a href="#coursenoticewrap">课程通知</a></li>
+            </ul>
+            <div id="mycoursewrap" class="mycoursewrap">
+            	<div class="curserlistwrap">
+                	<h1><span class="primary">{$user_info.grade_stage}</span> {$user_info.grade_year}</h1>
+                    <h2>想在班级里名列前茅？那就请打开你的课本同步学习和练习</h2>
+                    <ul class="curserlistnav">
+                    	<volist name="lesson_List" id="vo">
+                    	<li><a href="#book{$vo.pkid}"><img src="{$vo.book_cover}" width="123" height="177"/><span>{$vo.course_title}</span><span>{$vo.title}</span></a></li>
+                    	</volist>
+                    </ul>
+                    
+                    <h3>章节列表<b></b></h3>
+                    <volist name="arr_video_list" id="vo" key='key'>
+                    <div class="articlelist" id="book{$key-1}">
+                    	<ol>
+                    	<volist name="vo" id="v">
+                        	<li style="font-size:16px;">{$v.title}<a href="/Frontend/Play/index/videoId/{$v.pkid}">{$v.type_name}</a></li>
+                        	</volist>
+                        </ol>
+                    </div>
+                    </volist>
+                </div>
+            </div>
+            <div id="coursenoticewrap" class="coursenoticewrap">
+              <h3 class="list">文章列表<b></b><input type="button" value=" " class="editnotice"></h3>
+           	  <div class="noticelist">
+					<h3><a href="#">2014年6月25日   小学二年级 语文第一学期 第一章 第九节 课程上线啦! </a><b></b></h3>
+                    <div>
+                        <p>内容展示展开，内容展示展开，内容展示展开，内容展示展开，内容展示展开，内容展示展开，内容展示展开，内容展示展开，内容展示展开，内容展示展开，内容展示展开，内容展示展开，内容展示展开，内容展示展开，内容展示展开，内容展示展开，内容展示展开，内容展示展开
+                        </p>
+                    </div>
+					<h3><a href="#">2014年6月25日   小学二年级 语文第一学期 第一章 第九节 课程上线啦! </a><b></b></h3>
+                    <div>
+                        <p>内容展示展开，内容展示展开，内容展示展开，内容展示展开，内容展示展开，内容展示展开，内容展示展开，内容展示展开，内容展示展开，内容展示展开，内容展示展开，内容展示展开，内容展示展开，内容展示展开，内容展示展开，内容展示展开，内容展示展开，内容展示展开
+                        </p>
+                    </div>
+					<h3><a href="#">2014年6月25日   小学二年级 语文第一学期 第一章 第九节 课程上线啦! </a><b></b></h3>
+                    <div>
+                        <p>内容展示展开，内容展示展开，内容展示展开，内容展示展开，内容展示展开，内容展示展开，内容展示展开，内容展示展开，内容展示展开，内容展示展开，内容展示展开，内容展示展开，内容展示展开，内容展示展开，内容展示展开，内容展示展开，内容展示展开，内容展示展开
+                        </p>
+                    </div>
+          	  </div>
+          </div>
+        </div>
+    </div>
+    <!--登陆后页面 结束-->
+  <!--footer-->
+  <div class="footer">
+  	<hr>
+  	<div class="location"><h1>上师大交大100辅导中心</h1><p>地址：上海市徐汇区虹漕南路215号（上师大科技园）</p></div>
+    <div class="contact"><h1>全国统一咨询热线：</h1><p><br/></p><span>021-34690659 / 021-61507222</span></div>
+    <div class="logo2"></div>
+  </div>
+  <!--footer end-->
+</div>
+
+</body>
+</html>

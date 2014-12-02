@@ -1,0 +1,2 @@
+<?php if (!defined('THINK_PATH')) exit();?>
+<select id="course_id" name="course_id" onchange="" ondblclick="" class="" ><option value="" >选择科目</option><?php  foreach($course_list as $key=>$val) { if(!empty($course_id) && ($course_id == $key || in_array($key,$course_id))) { ?><option selected="selected" value="<?php echo $key ?>"><?php echo $val ?></option><?php }else { ?><option value="<?php echo $key ?>"><?php echo $val ?></option><?php } } ?></select>

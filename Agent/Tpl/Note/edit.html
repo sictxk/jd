@@ -1,0 +1,98 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>静安商务委后台管理</title>
+	<link rel="stylesheet" type="text/css" href="/Public/Backend/css/layout.css" />
+	<link rel="stylesheet" type="text/css" href="/Public/Backend/css/editor.css" />
+	<link href="/Public/Backend/scripts/DatePicker/skin/WdatePicker.css" rel="stylesheet" type="text/css">
+	<script type="text/javascript" src="/Public/Backend/scripts/mootools-core-1.4.5.js"></script>
+	<script type="text/javascript" src="/Public/Backend/scripts/mootools-more-1.4.0.1.js"></script>
+	<script type="text/javascript" src="/Public/Backend/scripts/public.js"></script>
+	<script type="text/javascript" src="/Public/Backend/scripts/DatePicker/WdatePicker.js"></script>
+	<script type="text/javascript" src="/Public/Backend/ckeditor/ckeditor.js"></script>
+    <script type="text/javascript" src="/Public/Backend/ckeditor/ckfinder/ckfinder.js"></script>
+    <taglib name='Html' />
+	<script type="text/javascript">
+		window.addEvent('domready', function(){
+			initTab(0);
+			checkNote();
+		});
+	</script>
+
+</head>
+
+<body>
+	<div class="header">
+		通知编辑&gt;&gt;{$arr_form.title}
+	</div>
+	
+	<div class="container">
+		<form id="MyForm1" name="MyForm1" method="post" action="/Backend/Note/renew">
+			<input name="pkid" type="hidden" value="{$arr_form.pkid}"/>
+			<ul id="tabmenu">
+				<li><a href="javascript:void(0);">基本信息</a></li>
+
+				<li><a href="javascript:void(0);">通知正文</a></li>
+			</ul>
+			<div id="tabcontent">
+				<div class="tabitem tabitemselected">
+					<table border="0" cellpadding="5" cellspacing="0" class="tableform" width="100%">
+						<tr>
+							<td align="right" width="100"><span class="need">通知标题：</span></td>
+							<td><textarea name="title" id="title" cols="50" rows="2"/>{$arr_form.title}</textarea><strong>(标题最多允许两行,可根据需要换行)</strong></td>
+						</tr>
+						<tr>
+							<td align="right" width="100"><span class="need">通知概要：</span></td>
+							<td><textarea id="intro" name="intro" rows="5" cols="50" >{$arr_form.intro}</textarea></td>
+						</tr>
+						<tr>
+							<td align="right" width="100"><span class="need">选择科室：</span></td>
+							<td><html:select name="dept_id" options="dept_id" first="选择科室" selected="dept_value"/></td>
+						</tr>
+						<tr>
+							<td align="right" width="100"><span class="need">结束日期：</span></td>
+							<td><input name="exdate" type="text" id="exdate" maxlength="50" class="long" onclick="WdatePicker()" value="{$arr_form.exdate}"/></td>
+						</tr>
+						<tr>
+							<td align="right" width="100"><span class="need">对外状态：</span></td>
+							<td><html:radio radios="status" checked="value" name="status" /></td>
+						</tr>
+					</table>
+		    	</div>
+				<div class="tabitem">
+				  <textarea id="context" name="context" rows="12" cols="20" class="long">{$arr_form.context}</textarea>
+				</div>
+
+				
+			</div>
+				<div>
+				<table border="0" cellpadding="5" cellspacing="0" class="tableform" width="100%">
+					<tr>
+						<td width="100" height="40">&nbsp;</td>
+						<td>
+							<input type="submit" id="SubmitBtn" name="SubmitBtn" value="提交" />
+							
+						</td>
+					</tr>
+				</table>
+				</div>
+		</form>
+	</div>
+</body>
+</html>
+<script type="text/javascript"> 
+	var editor = CKEDITOR.replace('context',{
+		filebrowserBrowseUrl : 'ckeditor/ckfinder/ckfinder.html',
+		filebrowserImageBrowseUrl : 'ckeditor/ckfinder/ckfinder.html?Type=Images',
+		filebrowserFlashBrowseUrl : 'ckeditor/ckfinder/ckfinder.html?Type=Flash',
+		filebrowserUploadUrl :
+		'ckeditor/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files',
+		filebrowserImageUploadUrl :
+		'ckeditor/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images',
+		filebrowserFlashUploadUrl :
+		'ckeditor/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Flash'
+	});
+</script>
+
+

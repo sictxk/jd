@@ -1,0 +1,59 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<script type="text/javascript" src="/Public/Member/static8/script/jquery-1.4.3.min.js"></script>
+<script type="text/javascript" src="/Public/Member/static8/script/public.js"></script>
+<title>伊兔网-用户登录-全国首家精准教育服务网站</title>
+</head>
+<style type="text/css">
+body,html,label,input{margin:0;padding:0;overflow:hidden;font-size:12px;}
+.login_cor{height:264px;background:#7fc2de;}
+.login_bg{ background:url(/Public/Member/static8/images/login_bgdl.jpg) no-repeat 0 0;width:1000px;height:391px; margin:-326px 0 0 0;position:absolute;overflow:hidden;}
+.warpper{width:1000px;margin:0 auto;}
+.loginPass{float:right;margin:148px 80px 0 0; display:inline;width:380px;border:0 solid red;}
+.loginPass dd{margin:12px 0 0 0;padding:0;height:21px; clear:both;}
+.loginPass dd input.tx{width:242px;height:21px;background:#fff;border:1px solid #e9e9e9;line-height:21px; text-indent:5px; outline:none;margin:0 0 0 109px;}
+.loginPass dd span.l{float:left; display:inline;margin:16px 0 0 105px;}
+.loginPass dd span.r{float:right;display:inline;margin:16px 30px 0 0;}
+.loginPass dd span.r a{color:#235f92; text-decoration:none;}
+.loginPass dd span.r a:hover{ text-decoration:underline;}
+.loginPass dd input.btn{width:315px;height:35px;border:none;background:none;margin:17px 0 0 38px; cursor:pointer;}
+.indexBack{width:280px;height:95px; position:absolute;margin:15px 0 0 560px;}
+.indexBack a{ display:block;width:280px;height:95px;}
+</style>
+<script type="text/javascript">
+function boxLoad(){
+	var Winh=document.documentElement.clientHeight;
+	var box=document.getElementById("dfBox");
+	if(box){
+		box.style.marginTop=(Winh-box.clientHeight)/2 + "px";	
+		box.parentNode.style.height=Winh + "px";
+	}
+}
+
+window.onload=function(){
+	boxLoad();
+}
+window.onresize=function(){
+	boxLoad();
+}
+</script>
+<body>
+<div class="loginBox" id="dfBox">
+			<div class="login_cor"></div>
+            <div class="warpper"><div class="login_bg">
+            <div class="indexBack"><a href="/"></a></div>
+            <form id="LoginForm" name="LoginForm" method="post" action="/Member/User/login_verify">
+	<dl class="loginPass">
+                <!--<dd><input class="tx" type="text" name="login_email" id="login_email" value="{$data_user.login_email}"/></dd>-->
+                <dd><input class="tx" type="text" name="mobile" id="mobile" value="{$data_user.mobile}"/></dd>
+                <dd><input class="tx" type="password" name="login_pass" id="login_pass" value=""/></dd>
+                <dd><span class="l"><label><input type="checkbox" name="rember" style="float:left"/>记住登录帐号</label></span><span class="r"><a href="/Member/User/regist">免费注册</a>&nbsp;<a href="/Member/User/forget">忘记密码</a></span></dd>
+                <dd><input type="button" class="btn" id="LoginBtn"/></dd>
+    </dl>
+            </form>
+            </div></div>
+</div>
+</body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>乐活基地合作平台</title>
+	<link rel="stylesheet" type="text/css" href="css/layout.css" />
+	<link rel="stylesheet" type="text/css" href="css/editor.css" />
+	<script type="text/javascript" src="./scripts/mootools-core-1.4.5.js"></script>
+	<script type="text/javascript" src="./scripts/mootools-more-1.4.0.1.js"></script>
+	<script type="text/javascript" src="./scripts/public.js"></script>
+	<script type="text/javascript" src="./CKEditor/CKEditor.js"></script>
+	<script type="text/javascript">
+		window.addEvent('domready', function(){
+			initTab();
+			
+			if (typeof(CKEDITOR) == 'undefined') {
+				alert('加载CKEditor');
+			} else {
+				CKEDITOR.replace( 'featureeditor' );
+			}
+		});
+	</script>
+</head>
+
+<body>
+	<div class="header">
+		绑定设置
+	</div>
+	<div class="container">
+		<form id="MyForm" method="post" action="./?c=User_update_info">
+			<input name="up_type" type="hidden" value="binding">
+			<div id="tabcontent">
+				<div class="tabitem tabitemselected binding">
+					<table border="0" cellpadding="5" cellspacing="0" class="tableform" width="100%">
+						<tr>
+							{{if $arr_form.binding_email!=''}}
+							<td align="right" width="100"><span class="ok">已绑定</span></td>
+							{{else}}
+							<td align="right" width="100"><span class="warning">未绑定</span></td>
+							{{/if}}
+							<td width="200"><input name="binding_email" type="text" class="tel" id="address" value="{{$arr_form.binding_email}}" /></td>
+							<td width="90"><strong>绑定电子邮箱</strong></td>
+							<td>可不同于注册邮箱。当您的基地有新的订单和信息时，我们会将发送到您的邮箱。</td>
+						</tr>
+						<tr>
+							{{if $arr_form.binding_mobile!=''}}
+							<td align="right" width="100"><span class="ok">已绑定</span></td>
+							{{else}}
+							<td align="right" width="100"><span class="warning">未绑定</span></td>
+							{{/if}}
+							
+							<td><input name="binding_mobile" type="text" class="tel" id="address" value="{{$arr_form.binding_mobile}}" /></td>
+							<td><strong>绑定移动电话</strong></td>
+							<td>可不同于账号移动电话。当您的基地有新的订单和信息时，我们会将发送到您的移动电话。</td>
+						</tr>
+					</table>
+		    </div>
+            </div>
+			<div>
+				<table border="0" cellpadding="5" cellspacing="0" class="tableform" width="100%">
+					<tr>
+						<td width="100" height="40">&nbsp;</td>
+						<td>
+							<input type="submit" id="SubmitBtn" value="绑定" />
+							<input type="reset" value="重置" />
+						</td>
+					</tr>
+				</table>
+			</div>
+		</form>
+	</div>
+</body>
+</html>

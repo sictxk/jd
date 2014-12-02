@@ -1,0 +1,132 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>伊兔网---全国首家最专业的教育点评网站</title>
+<link rel="stylesheet" type="text/css" href="/Public/Member/style2/public.css" />
+<script type="text/javascript" src="/Public/Member/script/jquery.js"></script>
+</head>
+
+<body>
+
+<div class="warBox">
+		<div class="header">
+    <include file="./Tpl/Default/header4.html" />
+
+        
+        </div>
+        <div class="h_height"></div>
+</div>
+<div class="warpper">
+
+        
+        <div class="leftConBox">
+   <div class="personalMenu">
+   					<h2 class="tit">{$basic_info['nickname']}</h2>
+                    <dl>
+                    			<dt>个人信息</dt>
+                                <dd><a href="/Member/User/profile">·基本资料</a></dd>
+                                <dd><a href="/Member/User/changepass">·修改密码</a></dd>
+                                <dd><a href="/Member/Paper/index">·定制试卷</a></dd>
+                    </dl>
+                    
+                    <div class="want_teacher"><a href="/Member/User/toteacher">我要做老师</a></div>
+                    
+   </div>     
+        
+        </div>
+        <div class="rightConBox">
+<div class="reservation"><span></span><a href="/Member/Teacher/">选择老师预约</a></div>
+<div class="progressbar progressbara">
+			<dl>
+<dd class="j"><span class="ok1"></span></dd>      
+<dd class="s"><span class="ok2"></span></dd>      
+<dd class="k"><span class="ok3"></span></dd>      
+<dd class="y"><span class="ok4"></span></dd>         
+            </dl>
+			<div></div>
+</div>
+<div class="tipsBox">
+<div style="margin-top:10px;margin-bottom:10px;">当前积分数：<font color="blue">{$total_score}</font></div>
+		小贴士：<br />
+1. 如果预定后老师长时间没有联系或试课后不满意老师可即时撤销预定，可进行评价投诉详请查新手上路---伊兔规则<br />
+2.当老师授课完成后，请确认授课，并记得给老师评价和评分噢<br />
+3.分享你喜欢的老师让老师变的更可口<br />
+</div>
+<div id="contentE" class="area">
+				<div class="recent">
+            <span></span>近期浏览    		
+                </div>
+
+                      <div class="cons">
+<div class="con" style="left: 0px;">
+				<volist name="data_list_log" id="vo">
+                <div class="left "> 
+                				<if condition="$vo.avatar neq ''">
+                                <a href="/Member/Space/homepage/tid/{$vo.teacher_id}"><img src="{$vo.avatar}" width="68" height="68"/></a>
+                                <else/>
+                                <a href="/Member/Space/homepage/tid/{$vo.teacher_id}"><img src="/Public/Member/images/avatar.jpg" width="68" height="68"/></a>
+                                </if>
+                </div>
+                </volist>
+			
+</div>
+                      </div>
+ 					 <div class="btns"><a href="javascript:void(0)" class="up"></a><a href="javascript:void(0)" class="down"></a></div>
+</div>
+<script type="text/javascript">
+		jQuery(function(jq){
+			var rr = jq('#contentE');
+			var conr = rr.find('div.con'),
+				conr0 = conr[0],
+				btnWr = rr.find('> div.btns'),
+				btnPr = btnWr.find('a.up'),
+				btnNr = btnWr.find('a.down');
+			
+			var lisr = conr.find('.left');
+			
+			conr.find(".bord").hover(function(){
+				jq(this).addClass("bgBord");
+			},function(){
+				jq(this).removeClass("bgBord");
+			});
+			
+			var pnumr = 6, numr = lisr.length;
+			if(numr <= pnumr)return;
+			
+			var owr = lisr[1].offsetLeft - lisr[0].offsetLeft, 
+				idxArear = [0, numr - pnumr],
+				idxr = 0;
+			
+			function updateNum(n){
+				if (n > idxArear[1] || n < idxArear[0]) {return;}
+				
+				btnPr[((n == 0)?'add':'remove') + 'Class']('uN');
+				btnNr[((n == idxArear[1])?'add':'remove') + 'Class']('dN');
+				
+				idxr = n;
+				conr.stop().animate({left: -n * owr},300);
+			}
+			
+			btnPr.click(function(){
+				updateNum(idxr - 1);
+				return false;
+			});
+			btnNr.click(function(){
+				updateNum(idxr + 1);
+				return false;
+			});
+		});
+</script>
+        
+        </div>
+</div>
+
+
+<div class="cl"></div>
+
+    <include file="./Tpl/Default/footer.html" />
+
+
+</body>
+</html>

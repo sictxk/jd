@@ -1,0 +1,28 @@
+<tr>
+<td align="left"><taglib name='Html' />
+<html:select name="category_id" id="category_id" options="arr_category" first="一级分类" selected="category_value"/></td>  
+<td align="left"><span id="second_panel">
+<html:select name="second_id" id="second_id" options="second_list"  first="二级分类"  selected="second_value" /></span></td>  
+<td align="left"><span id="third_panel">
+<html:select name="third_id" id="third_id" options="third_list"  first="三级分类"  selected="third_value" /></span></td>  
+<td align="left"><span id="course_panel">
+<html:select name="course_id" id="course_id" options="course_list"  first="科目列表"  selected="course_value" /></span></td>  
+<td align="left"><input type="button" value="增加" id="bindCourseBtn"/></td>  
+</tr>
+
+<volist name="data_list_course" id="vo">
+<tr>
+<td align="left">{$arr_category[$vo['category_id']]}
+</td>           
+<td align="left">{$vo.second_title}
+</td> 
+<td align="left">{$vo.third_title}
+</td> 
+<td align="left">{$vo.course_title}
+</td> 
+<td align="left">
+<input type="button"  class="DelBtn" value="删除" onclick="DoDelCouse({$vo.id});"/>
+</td>  
+</tr>
+</volist>
+

@@ -1,0 +1,76 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>播放xxx-交大100-在线学堂</title>
+<link href="/Public/Frontend/jQueryAssets/jquery.ui.core.min.css" rel="stylesheet" type="text/css">
+<link href="/Public/Frontend/jQueryAssets/jquery.ui.theme.min.css" rel="stylesheet" type="text/css">
+<link href="/Public/Frontend/jQueryAssets/jquery.ui.tabs.min.css" rel="stylesheet" type="text/css">
+<link href="/Public/Frontend/css/generic.css" type="text/css" rel="stylesheet">
+<link href="/Public/Frontend/jQueryAssets/jquery.ui.accordion.min.css" rel="stylesheet" type="text/css">
+<script src="/Public/Frontend/jQueryAssets/jquery-1.8.3.min.js" type="text/javascript"></script>
+<script src="/Public/Frontend/jQueryAssets/jquery-ui-1.9.2.tabs.custom.min.js" type="text/javascript"></script>
+<script src="/Public/Frontend/jQueryAssets/jquery-ui-1.9.2.accordion.custom.min.js" type="text/javascript"></script>
+<script type="text/javascript">
+$(function() {
+	$( ".noticelist" ).accordion(); 
+});
+</script>
+  <!-- Chang URLs to wherever Video.js files will be hosted -->
+  <link href="/Public/Frontend/video_js/video-js.css" rel="stylesheet" type="text/css">
+  <!-- video.js must be in the <head> for older IEs to work. -->
+  <script src="/Public/Frontend/video_js/video.js"></script>
+
+  <!-- Unless using the CDN hosted version, update the URL to the Flash SWF -->
+  <script>
+    videojs.options.flash.swf = "/Public/Frontend/video_js/video-js.swf";
+  </script>
+</head>
+
+<body>
+<div class="wrapper">
+    <div class="topwrap">
+        <div class="logo"><div class="slogan"></div></div>
+        <div class="topo">
+        <div class="playinginfo">正在播放 {$dataVideo['lesson_title']}  {$dataVideo['title']}</div>
+        <a href="/Frontend/Learning">返回学习中心</a> &nbsp;&nbsp;&nbsp;<a target="_blank" href="http://www.google.cn/intl/zh-CN/chrome/browser/?installdataindex=chinabookmarkcontrol&brand=CHUN&gclid=CM373-qTzcECFVgrvQodjTkAdQ">谷歌Chrome浏览器</a>
+        </div>
+    </div>
+    <!--播放 开始-->
+    <div class="playingwrap">
+		<div id="Media" class="media">
+			<!--<video id="Video" src="{$dataVideo['video_path']}" width="1200" height="618" preload="auto" controls="controls">
+				<source src="{$dataVideo['video_path']}" type="video/mp4" />
+			</video>-->
+			  <video id="Video" src="{$dataVideo['video_path']}" class="video-js vjs-default-skin" controls preload="auto" width="1200" height="618">
+			    <source src="{$video_path}" type="video/mp4" />
+			    <track kind="captions" src="demo.captions.vtt" srclang="en" label="English"></track><!-- Tracks need an ending tag thanks to IE9 -->
+			    <track kind="subtitles" src="demo.captions.vtt" srclang="en" label="English"></track><!-- Tracks need an ending tag thanks to IE9 -->
+			    <p class="vjs-no-js">To view this video please enable JavaScript, and consider upgrading to a web browser that <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a></p>
+			  </video>
+		</div>
+    </div>
+    <!--播放 结束-->
+    <!--播放列表 开始-->
+    <div class="playingcoursewrap">
+        <div class="articlelist">
+            <ol>
+           	<volist name="lesson_List" id="v">
+                <li>{$v.title}<a href="/Frontend/Play/index/videoId/{$v.pkid}">{$v['type_name']}</a></li>
+             </volist>
+            </ol>
+        </div>
+	</div>
+    <!--播放列表 结束-->
+      <!--footer-->
+  <div class="footer">
+  	<hr>
+  	<div class="location"><h1>上师大交大100辅导中心</h1><p>地址：上海市徐汇区虹漕南路215号（上师大科技园）</p></div>
+    <div class="contact"><h1>全国统一咨询热线：</h1><p><br/></p><span>021-34690659 / 021-61507222</span></div>
+    <div class="logo2"></div>
+  </div>
+  <!--footer end-->
+</div>
+
+</body>
+</html>

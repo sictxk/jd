@@ -1,0 +1,248 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>复爵教育后台管理</title>
+    <link rel="stylesheet" type="text/css" href="/Public/Backend/css/layout.css" />
+    <link rel="stylesheet" type="text/css" href="/Public/Backend/css/editor.css" />
+    <script type="text/javascript" src="/Public/Backend/scripts/mootools-core-1.4.5.js"></script>
+    <script type="text/javascript" src="/Public/Backend/scripts/mootools-more-1.4.0.1.js"></script>
+    <script type="text/javascript" src="/Public/Backend/scripts/public.js"></script>
+    <script type="text/javascript" src="/Public/Backend/scripts/jquery-1.4.2.js"></script>
+    <script type="text/javascript">var $$=jQuery.noConflict();</script>
+    <script type="text/javascript" src="/Public/Backend/scripts/jq_agency.js"></script>
+	<script type="text/javascript">
+		window.addEvent('domready', function(){
+			initTab({$tab_num});
+            checkAgency();
+		});
+	</script>
+	<script type="text/javascript">    
+	    function DoDelImg(Pkid){
+	    	var msg='确定要删除此图片吗?';
+	    	if(confirm(msg)){
+                window.location.href="/Backend/Agency/delimg/pkid/"+Pkid;
+	    	}
+	    }
+	    function DoDelCouse(id){
+	    	var msg='确定要删除此科目吗?';
+	    	if(confirm(msg)){
+                window.location.href="/Backend/Agency/delCourse/id/"+id+"/pno/"+{$pno};
+	    	}
+	    }
+	</script>
+</head>
+
+<body>
+	<div class="header">
+		修改机构信息&gt;&gt;{$arr_form.title}
+	</div>
+	
+	<div class="container">
+		<form id="MyForm1" name="MyForm1" method="post" action="/Backend/Agency/renew" enctype="multipart/form-data">
+		<input name="pkid" id="pkid" type="hidden" value="{$arr_form.pkid}"/>
+		<input name="tab_num" type="hidden" value="{$tab_num}"/>
+        <input name="pno" id="pno" type="hidden" value="{$pno}"/>
+			<ul id="tabmenu">
+				<li><a href="javascript:void(0);">基本信息</a></li>
+				<li><a href="javascript:void(0);">相册图片</a></li>
+				<li><a href="javascript:void(0);">培训科目</a></li>
+			</ul>
+			<div id="tabcontent">
+				<div class="tabitem">
+					<table border="0" cellpadding="5" cellspacing="0" class="tableform" width="100%">
+						<tr>
+							<td align="right" width="100"><span class="need">机构名称：</span></td>
+							<td><input name="title" type="text" id="title" maxlength="50" class="long" value="{$arr_form.title}"/></td>
+						</tr>
+                        <tr>
+                            <td align="right" width="100"><span class="need">所属品牌：</span></td>
+                            <td><taglib name='Html' />
+                                <html:select name="brand_id" id="brand_id" options="brand" first="选择品牌" selected="brand_id" /></td>
+                        </tr>
+                        <!--<tr>
+                            <td align="right" width="100"><span class="need">机构类型：</span></td>
+                            <td>
+                                <html:checkbox checkboxes="category" checked="category_id" name="category_id" separator=" " />
+                            </td>
+                        </tr>-->
+                        <tr>
+                            <td align="right" width="100"><span class="need">所在城市：</span></td>
+                            <td>
+                                <html:select name="city_id" id="city_id" options="city_list" selected="city_id" first="选择城市" />
+                                <dl class="geographical" id="area_panel">
+                                    <html:select name="area_id" id="area_id" options="area_list" selected="area_id" first="选择区县" />
+                                </dl>
+                            </td>
+                        </tr>
+						<tr>
+							<td align="right" width="100"><span class="need">机构地址：</span></td>
+							<td><input name="address" type="text" id="address" class="long" value="{$arr_form.address}"/></td>
+						</tr>
+						<tr>
+							<td align="right" width="100"><span class="need">地图坐标：</span></td>
+							<td><input name="long_lat" type="text" id="long_lat" class="long" value="{$arr_form.long_lat}"/>&nbsp;<a href="http://api.map.baidu.com/lbsapi/getpoint/index.html" target="_blank">获取坐标</a></td>
+						</tr>
+
+                        <tr>
+                            <td align="right"><span class="need">联系电话：</span></td>
+                            <td><input name="telephone" type="text" id="telephone" maxlength="20" class="tel" value="{$arr_form.telephone}" /></td>
+                        </tr>
+                        <tr>
+                            <td align="right"><span class="need">营业时间：</span></td>
+                            <td width="200"><input name="operating_hours" type="text" id="operating_hours" class="tel" value="{$arr_form.operating_hours}" /></td>
+                        </tr>
+                        <tr>
+                            <td align="right"><span class="need">主营业务：</span></td>
+                            <td width="200"><textarea name="main_business"  id="main_business" cols="60" rows="3">{$arr_form.main_business}</textarea></td>
+                        </tr>
+ 						<tr>
+							<td align="right" width="100"><span class="need">优惠方式：</span></td>
+							<td><taglib name='Html' />
+							<html:radio radios="promotion_type" checked="promotion_value" name="promotion_type" /></td>
+						</tr>
+						<tr  id="discountTr" style="display:none;">
+							<td align="right"><span class="need">折扣比例：</span></td>
+                            <td><taglib name='Html' />
+                            <html:select options="discount_rate" checked="discount_value" name="discount_rate" /></td>
+                        </tr>
+						<tr id="rebateTr" style="display:none;">
+							<td align="right"><span class="need">优惠金额：</span></td>
+                            <td><input name="rebate_cash" type="text" id="rebate_cash" class="tel" value="{$arr_form.rebate_cash}" /></td>
+                        </tr>
+                        <tr>
+                            <td align="right"><span class="need">伊兔特惠：</span></td>
+                            <td width="200"><textarea name="vouchsafe"  id="vouchsafe" cols="60" rows="3">{$arr_form.vouchsafe}</textarea></td>
+                        </tr>
+                        <tr>
+                            <td align="right"><span class="need">其它信息：</span></td>
+                            <td width="200"><textarea name="other_info"  id="other_info" cols="60" rows="5">{$arr_form.other_info}</textarea></td>
+                        </tr>
+						<!--<tr>
+							<td align="right" width="100" valign="top"><span class="need">形象图：</span></td>
+							<td>
+								<input type="file" name="picture" id="picture" class="long" value=""/>
+							  <div style="padding:5px 0">200X200以上 等高宽</div>
+							  <if condition="$arr_form.picture neq ''"><img src="{$arr_form.picture}" width="250"><else/>未上传</if>
+						  </td>
+						</tr>-->
+						<tr>
+							<td align="right" width="100"><span class="need">签约状态：</span></td>
+							<td>    <taglib name='Html' />
+							<html:radio radios="sign_type" checked="type_value" name="sign_type" /></td>
+						</tr>
+						<tr>
+							<td align="right" width="100"><span class="need">精选商家：</span></td>
+							<td>    <taglib name='Html' />
+							<html:radio radios="join_best" checked="join_value" name="join_best" /></td>
+						</tr>
+					</table>
+		    	</div>
+				<div class="tabitem">
+				<div style="padding:5px 0">建议尺寸：1024X768高宽</div>
+					<table border="0" cellpadding="5" cellspacing="0" class="tableform" width="100%">
+						<tr bgcolor="#ffffcc">
+							<td align="right" width="20" valign="top"></td>
+							<td id="picturecontent">
+								<p style="margin-right: 5px;">图片标题：<input type="text" name="img_title[]"  style="margin-right: 5px;"/><input type="file" name="album[]" style="margin-right: 5px;"/><input id="newBtn" type="button" value="增加一行" /></p>
+								<script type="text/javascript">
+			                        var picContent = $('picturecontent');
+			                        $('newBtn').addEvent('click', function(e){
+			                            var pEl = new Element('p');
+			                            pEl.grab(new Element('span', {html: '图片标题：', styles: {'margin-right': 5}}));
+			                            pEl.grab(new Element('input', {type: 'text', name: 'img_title[]', styles: {'margin-right': 5}}));
+			                            pEl.grab(new Element('input', {type: 'file', name: 'album[]', styles: {'margin-right': 5}}));
+			                            pEl.grab(new Element('input', {type: 'button', value: '删除', events: {click: function(e){e.target.getParent().destroy();}}}));
+			                            picContent.grab(pEl);
+			                        });
+			                    </script>
+						  </td>
+						</tr>
+
+                        <tr>
+                            <td align="right" valign="top"></td>
+                            <td>
+                            <ul class="picturlibrary">
+                            	<volist id="d" name="album_list">
+                                <li>
+                                <a href="{$d.picture}" target="_blank" title="点击查看原图">
+                                <img src="{$d.picture}" width="150" height="100"/>
+                                </a>
+                                <!--<input type="text" name="old_img_title_{$d.pkid}" value="{$d.seq}"/><br>-->
+                                <span style="width:150px;height:25px;overflow:hidden;">
+                                <!--<a style="float:left;" href="./?c=Scenic_sortimage&pkid={$arr_form.pkid}&img_id={$d.pkid}&tp=up">[←前移]</a>-->
+                                <a style="float:left;margin-left:10px;margin-right:10px;" href="javascript:DoDelImg({$d.pkid})">[X删除]</a>
+                                <!--<a style="float:left;" href="./?c=Scenic_sortimage&pkid={$arr_form.pkid}&img_id={$d.pkid}&tp=down">[后移→]</a>-->
+                                </span>
+                                </li>
+                                </volist>
+                            </ul>
+                            </td>
+                        </tr>
+					</table>
+				</div>
+				<div class="tabitem <if condition="$tab eq 2">tabitemselected</if>">
+					<div class="progress_Con progress_Cona">
+						<div class="curriculum_list curriculum_lista">
+						
+
+						
+							<table id="Step2Table">
+								<thead>
+									<tr>
+									<th align="left" width="150">一级类别</th>    
+									<th align="left" width="150">二级类别</th>   
+									<th align="left" width="150">三级类别</th>        
+									<th align="left" width="150">科目</th>           
+									<th align="left" width="150">操作</th>           
+									</tr>     
+								</thead>
+								<tbody id="Step2Tbody">
+								<tr>
+									<td align="left"><taglib name='Html' />
+									<html:select name="category_id" id="category_id" options="arr_category" first="一级分类" selected="category_value"/></td>  
+									<td align="left"><span id="second_panel">
+									<html:select name="second_id" id="second_id" options="second_list"  first="二级分类"  selected="second_value" /></span></td>  
+									<td align="left"><span id="third_panel">
+									<html:select name="third_id" id="third_id" options="third_list"  first="三级分类"  selected="third_value" /></span></td>  
+									<td align="left"><span id="course_panel">
+									<html:select name="course_id" id="course_id" options="course_list"  first="科目列表"  selected="course_value" /></span></td>  
+									<td align="left"><input type="button" value="增加" id="bindCourseBtn"/></td>  
+								</tr>
+								
+									<volist name="data_list_course" id="vo">
+									<tr>
+									<td align="left">{$arr_category[$vo['category_id']]}
+									</td>           
+									<td align="left">{$vo.second_title}
+									</td> 
+									<td align="left">{$vo.third_title}
+									</td> 
+									<td align="left">{$vo.course_title}
+									</td> 
+									<td align="left">
+									<input type="button"  class="DelBtn" value="删除" onclick="DoDelCouse({$vo.id});"/>
+									</td>  
+									</tr>
+									</volist>
+								</tbody>
+							</table>         
+						</div>
+					</div>
+				</div>
+			</div>
+				<div>
+				<table border="0" cellpadding="5" cellspacing="0" class="tableform" width="100%">
+					<tr>
+						<td width="100" height="40">&nbsp;</td>
+						<td>
+							<input type="button" id="BackBtn" name="BackBtn" value="返回" onclick="javascript:history.back();"/>
+							<input type="submit" id="SubmitBtn" name="SubmitBtn" value="提交" />
+						</td>
+					</tr>
+				</table>
+				</div>
+		</form>
+	</div>
+</body>
+</html>

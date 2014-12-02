@@ -1,0 +1,12 @@
+.progress_Con{/*border-bottom:2px solid #595959;border-right:2px solid #797979;*/background:#f7f7f7;margin:10px 0 0 0;padding:20px 0 20px 0;}
+.progress_Cona{margin:0;}
+
+dl.session{padding:10px 0 0 30px;height:80px;overflow:hidden;}
+dl.session dt{font-size:16px;font-weight:bold;padding:0 0 10px 30px;}
+dl.session dd{float:left;width:95px;text-align:center;display:inline;margin:10px 0 0 0;}
+dl.session dd span{ display:block;font-size:15px;padding:0 0 8px 0;}
+
+table.cycle{border-collapse:collapse;width:100%;}
+table.cycle th,table.cycle td{line-height:50px;}
+table.cycle th{width:100px; text-indent:50px;}
+table.cycle td select{width:80px;margin:0 30px 0 30px;}

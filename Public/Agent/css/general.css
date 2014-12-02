@@ -1,0 +1,38 @@
+@charset "utf-8";
+
+/*全局样式*/
+body {
+	margin: 0;
+	padding: 0;
+	background-color: #FFFFFF;
+	color: #333333;
+	font-family: "Microsoft YaHei", "微软雅黑", "SimSun", "宋体", Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	-webkit-text-size-adjust: none; /*修正CHROME下字体尺寸设置问题*/
+}
+ul, ol, dl, form {
+	margin: 0;
+	padding: 0;
+}
+h1, h2, h3, h4, h5, h6, p {
+	margin-top: 0;
+}
+input {
+	font-family: "Microsoft YaHei", "微软雅黑", "SimSun", "宋体", Arial, Helvetica, sans-serif;
+}
+a img {
+	border: none;
+}
+/*	站点链接的样式必须保持此顺序
+	包括用于创建悬停效果的选择器组在内。 */
+a:link {
+	color: #42413C;
+	text-decoration: underline;
+}
+a:visited {
+	color: #6E6C64;
+	text-decoration: underline;
+}
+a:hover, a:active, a:focus {
+	text-decoration: none;
+}

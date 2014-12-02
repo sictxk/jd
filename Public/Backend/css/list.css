@@ -1,0 +1,104 @@
+@charset "utf-8";
+/* CSS Document */
+
+.formskin {
+	line-height: 30px;
+	margin-bottom: 10px;
+	padding: 5px 10px;
+	background-color: #E7ECF3;
+	border-top: 1px solid #f6f9fd;
+	border-bottom: 1px solid #a5b6cd;
+}
+.formskin span {
+	margin-right: 10px;
+	color: #3399FF;
+}
+.formskin label, .formskin select, .formskin span {
+	margin-right: 10px;
+}
+.tableskin {
+	border-color:#333;
+	table-layout: fixed;
+	border-collapse: collapse;
+}
+.tableskin{
+	border:1px solid #c4d5e0;
+}
+.tableskin th {
+	border-top:0;
+	border-left:0;
+	border-right:0;
+	border-bottom:1px solid #9fbacb;
+}
+.tableskin td {
+	border:1px solid #ccc;
+}
+.tableskin th {
+	background-color: #eaf0f4;
+}
+.tableskin span.tip {
+	margin: 0 5px;
+	color: #FF0000;
+}
+/******************/
+.price{
+	font-size:16px;
+	font-weight:bold;
+	color:#C00;
+}
+/*****************/
+.servicetab {
+	zoom:1;
+	overflow:hidden;
+	background:#69C;
+	line-height:30px;
+	padding:0 5px;
+	position:relative;
+	color:#fff;
+	font-size:14px;
+	font-weight:bold;
+	margin-bottom:10px;
+}
+.servicetab ul {
+	margin-bottom:10px;
+	padding:10px;
+	background:#fff;
+	zoom:1;
+	overflow:hidden;
+	border-top:1px solid #2c548b;
+	border-bottom:1px solid #7aa9f0;
+	border-left:1px solid #3272bc;
+	border-right:1px solid #7aa9f0;
+}
+.servicetab li {
+	list-style:none;
+	float:left;
+	width:110px;
+}
+.servicetab li a {
+	width:100px;
+	clear:both;
+	display:block;
+	text-align:center;
+}
+.servicetab li a.addoneservice {
+	display:block;
+	border:3px dashed #ccc;
+	height:94px;
+	width:94px;
+	color:#ccc;
+	font-size:60px;
+	text-align:center;
+	line-height:80px;
+	text-decoration:none;
+}
+.servicetab li a.addoneservice:hover {
+	border:3px dashed #FC6;
+	color: #FC6;
+}
+.servicetab span.more{
+	position:absolute;
+	line-height:30px;
+	right:5px;
+	top:0;
+}
